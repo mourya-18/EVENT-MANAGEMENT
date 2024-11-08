@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Management Registration</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
     <div class="container">
         <h2>Registration Form</h2>
-        <form action="#" method="post">
-
+        <form action="#" method="post" onsubmit="return validateForm()">
             <label for="last-name">Username:</label>
             <input type="text" id="last-name" name="last-name" required>
 
@@ -32,5 +31,30 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function validateForm() {
+            const username = document.getElementById('last-name').value;
+            const password = document.getElementById('password').value;
+
+            // Username validation: first letter capital
+            const usernamePattern = /^[A-Z][a-zA-Z]*$/;
+            if (!usernamePattern.test(username)) {
+                window.alert("Invalid Username");
+                return false;
+            }
+
+            // Password validation: starts with capital letter and contains at least one number
+            const passwordPattern = /^[A-Z][A-Za-z0-9]*\d/;
+            if (!passwordPattern.test(password)) {
+                window.alert("Password must start with a capital letter and contain at least one number.");
+                return false;
+            }
+
+            // If all validations pass, show a success message
+            window.alert("Registration Successful!");
+            return true; // Allow form submission
+        }
+    </script>
 </body>
 </html>
